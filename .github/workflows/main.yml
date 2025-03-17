@@ -14,11 +14,11 @@ jobs:
       - name: Perform Soda Scan
         uses: sodadata/soda-github-action@main
         env:
-          SODA_CLOUD_API_KEY: ${{ secrets.SODA_CLOUD_API_KEY }}
-          SODA_CLOUD_API_SECRET: ${{ secrets.SODA_CLOUD_API_SECRET }}
-          POSTGRE_HOST: ${{ secrets.POSTGRE_HOST }}
-          POSTGRE_USERNAME: ${{ secrets.POSTGRE_USERNAME }}
-          POSTGRE_PASSWORD: ${{ secrets.POSTGRE_PASSWORD }}
+         SODA_CLOUD_API_KEY: ${{ secrets.SODA_CLOUD_API_KEY }}
+         SODA_CLOUD_API_SECRET: ${{ secrets.SODA_CLOUD_API_SECRET }}
+         POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}  # Correction du nom de variable
+         POSTGRES_USERNAME: ${{ secrets.POSTGRES_USERNAME }}
+         POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         with:
           soda_library_version: v1.0.4
           data_source: customers_certif
