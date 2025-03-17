@@ -19,5 +19,5 @@ jobs:
         with:
           soda_library_version: v1.0.4
           data_source: customers_certif
-          configuration: ../soda/configuration.yml
-          checks: ../soda/checks.yml
+          configuration: .github/soda/configuration.yml
+          checks: .github/soda/checks.yml
