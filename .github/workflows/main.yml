@@ -3,7 +3,7 @@
  # GitHub triggers this job when a user creates or updates a pull request.
  on: pull_request
  jobs:
- soda_scan:
+  soda_scan:
    runs-on: ubuntu-latest
    name: Run Soda Scan
    steps:
