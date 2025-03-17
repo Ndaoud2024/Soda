@@ -228,8 +228,3 @@ checks for btoc_customers:
       name: Firstname is empty
       column: FirstName
       fail: when > 0
-  # Template
-  - $template_alpha:
-      parameters:
-        table: btoc_customers
-      fail: when > 0
