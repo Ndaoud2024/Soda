@@ -20,6 +20,6 @@
          POSTGRE_PASSWORD: ${{ secrets.POSTGRE_PASSWORD }}
        with:
          soda_library_version: v1.0.4
-         data_source: snowflake_api_marts
+         data_source: customers_certif
          configuration: ../configuration.yml
          checks: ../checks.yml
