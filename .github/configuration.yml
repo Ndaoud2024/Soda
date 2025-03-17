@@ -3,14 +3,14 @@
      database: postgres
      schema: public
      env: 
-      host: ${{ secrets.POSTGRE_HOST }}
-      username: ${{ secrets.POSTGRE_USERNAME }}
-      password: ${{ secrets.POSTGRE_PASSWORD }}
+      host: ${{POSTGRE_HOST }}
+      username: ${{ POSTGRE_USERNAME }}
+      password: ${{ POSTGRE_PASSWORD }}
  soda_cloud:
      # Use cloud.soda.io for EU region
      # Use cloud.us.soda.io for US region
      host: cloud.soda.io
      env:
-        api_key_id: ${{ secrets.SODA_CLOUD_API_KEY }}
-        api_key_secret: ${{ secrets.SODA_CLOUD_API_SECRET }}
+        api_key_id: ${{ SODA_CLOUD_API_KEY }}
+        api_key_secret: ${{ SODA_CLOUD_API_SECRET }}
      scheme:
