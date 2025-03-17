@@ -1,0 +1,14 @@
+ data_source customers_certif:
+     type: postgres
+     host: aws-0-eu-west-3.pooler.supabase.com
+     username: postgres.qqehshljyphhoqsayegh
+     password: Dardilly2023*
+     database: postgres
+     schema: public
+ soda_cloud:
+     # Use cloud.soda.io for EU region
+     # Use cloud.us.soda.io for US region
+     host: cloud.soda.io
+     api_key_id: d439bf4a-dece-4c18-a8bb-885722a4ae8c
+     api_key_secret: O0MKRDPyiS7uXgjYTrlR63BEKoWteggUHHLznxO1EY_6Fj2IGzc4dw
+     scheme:

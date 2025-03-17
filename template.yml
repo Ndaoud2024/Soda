@@ -1,0 +1,7 @@
+templates:
+  - name: template_alpha
+    description: Reusable SQL for writing checks.
+    author: Narjes DAOUD
+    metric: alpha
+    query: |
+      SELECT count(*) as alpha FROM ${table}

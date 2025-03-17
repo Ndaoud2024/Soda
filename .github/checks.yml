@@ -1,0 +1,235 @@
+checks for btoc_customers:
+  - missing_count("Birthday"):
+      missing values:
+        - "NULL"
+      name: Completeness_Check if Birthday is null
+      fail: when > 0
+      attributes:
+        dimension: Completeness
+  - missing_count("Phone"):
+      missing values:
+        - "NULL"
+      name: Completeness_Check if Phone is null
+      fail: when > 0
+      attributes:
+        dimension: Completeness
+  - missing_count("Country"):
+      missing values:
+        - "NULL"
+      name: Completeness_Check if Country is null
+      fail: when > 0
+      attributes:
+        dimension: Completeness
+  - missing_count("CountryFull"):
+      missing values:
+        - "NULL"
+      name: Completeness_Check if CountryFull is null
+      fail: when > 0
+      attributes:
+        dimension: Completeness
+  - missing_count("EmailAddress"):
+      missing values:
+        - "NULL"
+      name: Completeness_Check if EmailAddress is null
+      fail: when > 0
+      attributes:
+        dimension: Completeness
+  - missing_count("FirstName"):
+      missing values:
+        - "NULL"
+      name: Completeness_Check if FirstName is null
+      fail: when > 0
+      attributes:
+        dimension: Completeness
+  - missing_count("Gender"):
+      missing values:
+        - "NULL"
+      name: Completeness_Check if Gender is null
+      fail: when > 0
+      attributes:
+        dimension: Completeness
+  - missing_count("LastRefreshTime"):
+      missing values:
+        - "NULL"
+      name: Completeness_Check if LastRefreshTime is null
+      fail: when > 0
+      attributes:
+        dimension: Completeness
+  - missing_count("StreetAddress"):
+      missing values:
+        - "NULL"
+      name: Completeness_Check if StreetAddress is null
+      fail: when > 0
+      attributes:
+        dimension: Completeness
+  - missing_count("Surname"):
+      missing values:
+        - "NULL"
+      name: Completeness_Check if Surname is null
+      fail: when > 0
+      attributes:
+        dimension: Completeness
+  - missing_count("Title"):
+      missing values:
+        - "NULL"
+      name: Completeness_Check if Title is null
+      fail: when > 0
+      attributes:
+        dimension: Completeness
+  - invalid_count("Birthday"):
+      valid format: date us
+      name: Validity_check if birthday is in US date format
+      fail: when > 0
+      attributes:
+        dimension: Validity
+  - invalid_count("Phone"):
+      valid format: phone number
+      name: Check if Phone is a correct phone number
+      fail: when > 0
+      attributes:
+        dimension: Validity
+  - invalid_count("EmailAddress"):
+      valid format: email
+      name: Check if EmailAddress is a correct email address
+      fail: when > 0
+      attributes:
+        dimension: Validity
+  - invalid_count("Gender"):
+      valid values:
+        - male
+        - female
+        - other
+        - Male
+        - Female
+        - Other
+        - MALE
+        - FEMALE
+        - OTHER
+      name: "Checks for consistency if Gender on the list [male, female, other]"
+      fail: when > 0
+      attributes:
+        dimension: Consistency
+  # Failed Rows Checks
+  - failed rows:
+      samples limit: 100
+      fail query: "SELECT\r\n    \"t\".\"Country\",  -- Utilisation des guillemets\
+        \ pour respecter la casse\r\n    \"t\".\"CountryFull\",  -- Utilisation des\
+        \ guillemets pour respecter la casse\r\n    COUNT(*) AS count\r\nFROM\r\n\
+        \    btoc_customers t\r\nLEFT JOIN\r\n    country cm ON \"t\".\"Country\"\
+        \ = \"cm\".\"iso2\"  -- Utilisation des guillemets pour respecter la casse\r\
+        \nWHERE\r\n    \"cm\".\"country\" IS NULL OR \"t\".\"CountryFull\" != \"cm\".\"country\"\
+        \  -- Comparaison correcte avec guillemets\r\nGROUP BY\r\n    \"t\".\"Country\"\
+        ,  -- Respect de la casse avec guillemets\r\n    \"t\".\"CountryFull\"  --\
+        \ Respect de la casse avec guillemet"
+      name: Checks for consistency between country and countryfull
+      fail: when > 0
+      attributes:
+        dimension: Consistency
+  - failed rows:
+      samples limit: 100
+      fail query: "SELECT\r\n    \"t\".\"Gender\",\r\n    \"t\".\"Title\",\r\n   \
+        \ \"t\".\"Country\",\r\n    \"t\".\"CountryFull\"\r\nFROM\r\n    btoc_customers  \
+        \ t\r\nWHERE\r\n    (\r\n        -- Si Gender est 'male', Title doit être\
+        \ 'mr', 'mister' ou 'sir' (insensible à la casse)\r\n        LOWER(\"t\".\"\
+        Gender\") = 'male' AND LOWER(\"t\".\"Title\") NOT IN ('mr.', 'mister', 'sir')\r\
+        \n    )\r\n    OR\r\n    (\r\n        -- Si Gender est 'female', Title doit\
+        \ être 'mrs', 'miss', 'missus', 'madam', ou 'ms' (insensible à la casse)\r\
+        \n        LOWER(\"t\".\"Gender\") = 'female' AND LOWER(\"t\".\"Title\") NOT\
+        \ IN ('mrs.', 'miss', 'missus', 'madam', 'ms.')\r\n    )\r\n    OR\r\n   \
+        \ (\r\n        -- Si Gender est 'other', Title doit être 'mrss' (insensible\
+        \ à la casse)\r\n        LOWER(\"t\".\"Gender\") = 'other' AND LOWER(\"t\"\
+        .\"Title\") != 'mx.'\r\n    );"
+      name: Checks for consistency between Title and Gender
+      fail: when > 0
+      attributes:
+        dimension: Consistency
+  - failed rows:
+      samples limit: 100
+      column: Title
+      fail query: "SELECT\r\n    \"t\".\"Title\"\r\nFROM\r\n    btoc_customers t\r\
+        \nWHERE        \r\n  LOWER(\"t\".\"Title\") NOT IN ('mr.', 'mister', 'sir','ms.','mrs.','madam','miss','missus','mx.');\r\
+        \n    "
+      name: "Checks for consistency if Title on the list ['mr.', 'mister', 'sir','ms.','mrs','madam','miss','missus','mx.']"
+      fail: when > 2
+      attributes:
+        dimension: Validity
+  - failed rows:
+      samples limit: 100
+      column: LastRefreshTime
+      fail query: "SELECT *\r\nFROM btoc_customers\r\nWHERE CAST(\"LastRefreshTime\"\
+        \ AS integer) > 1440"
+      name: Checks that the timeliness of the data
+      fail: when > 0
+      attributes:
+        dimension: Timeliness
+  - failed rows:
+      samples limit: 100
+      fail query: "SELECT\r\n    *\r\nFROM\r\n    btoc_customers\r\nWHERE\r\n    --\
+        \ Valide que la colonne Birthday suit le format MM/DD/YYYY\r\n    \"Birthday\"\
+        \ ~ '^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/([0-9]{4})$'\r\n    -- Convertir\
+        \ les dates valides en type DATE et comparer si elles sont supérieures à 150\
+        \ ans\r\n     AND TO_DATE(\"Birthday\", 'MM/DD/YYYY') > CURRENT_DATE - INTERVAL\
+        \ '150' YEAR;"
+      name: Checks for validity that all users's dates of birth do not exceed 150
+        years
+      fail: when > 0
+      attributes:
+        dimension: Validity
+  - failed rows:
+      samples limit: 100
+      fail query: "-- Query that checks if the StreetAddress is accurate\r\n\r\n--\
+        \ Sélectionne toutes les colonnes des lignes où l'adresse est considérée comme\
+        \ invalide\r\nSELECT *\r\nFROM btoc_customers\r\nWHERE \r\n    -- Vérifie\
+        \ si l'adresse est NULL\r\n    \"StreetAddress\" IS NULL\r\n    \r\n    --\
+        \ OU vérifie que l'adresse ne commence pas par un nombre\r\n    OR \"StreetAddress\"\
+        \ !~ '^[0-9]+'\r\n    \r\n    -- OU vérifie la présence de mots indésirables\
+        \ au début de l'adresse\r\n    OR \"StreetAddress\" ~* '^(in|at|on|the)\\\
+        s'\r\n    \r\n    -- OU vérifie que l'adresse ne correspond pas au format\
+        \ attendu\r\n    OR \"StreetAddress\" !~ '^[0-9]+\\s+[\\w\\s\\.-]+\\s+(Street|St\\\
+        .?|Avenue|Ave\\.?|Boulevard|Blvd\\.?|Drive|Dr\\.?|Road|Rd\\.?|Lane|Ln\\.?|Way|Place|Pl\\\
+        .?|Court|Ct\\.?|Circle|Cir\\.?|Terrace|Ter\\.?)$'\r\n    \r\n    -- OU vé\
+        rifie que l'adresse ne dépasse pas une longueur raisonnable (par exemple,\
+        \ 100 caractères)\r\n    OR LENGTH(\"StreetAddress\") > 100\r\n    \r\n  \
+        \  -- OU vérifie la présence de caractères spéciaux non autorisés\r\n    OR\
+        \ \"StreetAddress\" ~ '[^a-zA-Z0-9\\s\\,\\.#-]'"
+      name: Checks if the StreetAddress is accurate
+      fail: when > 0
+      attributes:
+        dimension: Accuracy
+  - invalid_count("Country"):
+      valid length: 2
+      name: Checks if Country is an ISO2 code
+      fail: when > 0
+      attributes:
+        dimension: Validity
+  - duplicate_count("EmailAddress") < 50:
+      samples limit: 2
+      attributes:
+        dimension: Uniqueness
+  - max_length("LastRefreshTime") = 2
+  - duplicate_count("Phone") < 50:
+      samples limit: 0
+      attributes:
+        dimension: Uniqueness
+  - row_count > 0
+  # Reference checks
+  - values in ("CountryFull") must exist in country (country)
+  - values in ("Country") must exist in country (iso2)
+  # Cross checks
+  - row_count same as btob_customers
+  # Distribution check
+  - distribution_difference(bandecommande) > 0.1:
+       method: ks
+       distribution reference file: ./customers_dist_ref.yml
+  #User-defined Check
+  - firstname_for_customers:
+      firstname_for_customers query: SELECT count(*) FROM btoc_customers
+      failed rows query: SELECT "FirstName" FROM btoc_customers WHERE "FirstName" IS NULL
+      name: Firstname is empty
+      column: FirstName
+      fail: when > 0
+  # Template
+  - $template_alpha:
+      parameters:
+        table: btoc_customers
+      fail: when > 0

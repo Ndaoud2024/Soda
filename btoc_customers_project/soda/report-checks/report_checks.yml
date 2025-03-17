@@ -1,0 +1,9 @@
+checks for btoc_customers:
+  - avg(chiffreaffaire) > 0:
+      name: Average revenue is positive
+  - min(chiffreaffaire) >= 0:
+      name: Minimum revenue is not negative
+  - max(chiffreaffaire) < 1000000:
+      name: Maximum revenue is within expected range
+  - avg(bandecommande) between 1 and 10:
+      name: Average order band is within expected range

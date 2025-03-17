@@ -1,0 +1,158 @@
+{
+
+  "checks for btoc_customers": [
+
+    {
+
+      "missing_count(\"FirstName\")": {
+
+        "missing values": [
+
+          "NULL"
+
+        ],
+
+        "name": "Check if FirstName is null",
+
+        "fail": "when > 0"
+
+      }
+
+    },
+
+    {
+
+      "invalid_count(\"FirstName\")": {
+
+        "valid format": "text",
+
+        "name": "Check if FirstName is a valid text",
+
+        "fail": "when > 0"
+
+      }
+
+    },
+
+    {
+
+      "invalid_count(\"FirstName\")": {
+
+        "valid length": "max 255",
+
+        "name": "Check if FirstName exceeds 255 characters",
+
+        "fail": "when > 0"
+
+      }
+
+    },
+
+    {
+
+      "missing_count(\"Surname\")": {
+
+        "missing values": [
+
+          "NULL"
+
+        ],
+
+        "name": "Check if Surname is null",
+
+        "fail": "when > 0"
+
+      }
+
+    },
+
+    {
+
+      "invalid_count(\"Surname\")": {
+
+        "valid format": "text",
+
+        "name": "Check if Surname is a valid text",
+
+        "fail": "when > 0"
+
+      }
+
+    },
+
+    {
+
+      "invalid_count(\"Surname\")": {
+
+        "valid length": "max 255",
+
+        "name": "Check if Surname exceeds 255 characters",
+
+        "fail": "when > 0"
+
+      }
+
+    },
+
+    {
+
+      "missing_count(\"EmailAddress\")": {
+
+        "missing values": [
+
+          "NULL"
+
+        ],
+
+        "name": "Check if Email is null",
+
+        "fail": "when > 0"
+
+      }
+
+    },
+
+    {
+
+      "invalid_count(\"EmailAddress\")": {
+
+        "valid format": "email",
+
+        "name": "Check if Email is a valid email format",
+
+        "fail": "when > 0"
+
+      }
+
+    },
+
+    {
+
+      "invalid_count(\"EmailAddress\")": {
+
+        "valid length": "max 255",
+
+        "name": "Check if Email exceeds 255 characters",
+
+        "fail": "when > 0"
+
+      }
+
+    },
+
+    {
+
+      "duplicate_count(\"EmailAddress\")": {
+
+        "name": "Check if Email is unique",
+
+        "fail": "when > 0"
+
+      }
+
+    }
+
+  ]
+
+}
+ 

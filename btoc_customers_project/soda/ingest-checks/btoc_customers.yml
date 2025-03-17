@@ -1,0 +1,24 @@
+checks for btoc_customers:
+  # Check fails when product_key or english_product_name is missing, OR
+  # when the data type of those columns is other than specified
+  - schema:
+      fail:
+        when required column missing: [id, "FirstName","Surname"]
+        when wrong column type:
+          id: integer
+          "FirstName": varchar
+          "Surname": varchar
+  # Check fails when any NULL values exist in the column
+  - missing_count(id) = 0:
+      name: All customers have an id
+  # Check fails when any NULL values exist in the column
+  - missing_count("FirstName") = 0:
+      name: All customers have a firstname
+  # Check fails when any NULL values exist in the column
+  - missing_count("Surname"):
+      name: All customers have a surname
+      warn: when > 0     
+  # Check fails when the number of products, relative to the
+  # previous scan, changes by 10 or more
+  - change for row_count < 15:
+      name: Customers are stable

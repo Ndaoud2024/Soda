@@ -1,0 +1,12 @@
+checks for btoc_customers:
+  - row_count > 0:
+      name: Table is not empty
+  - missing_count("FirstName") = 0:
+      name: All customers have a first name
+  - missing_count("Surname") = 0:
+      name: All customers have a last name
+  - missing_count("EmailAddress") = 0:
+      name: All customers have an email address
+  - invalid_count("EmailAddress") = 0:
+      name: All email addresses are valid
+      valid format: email

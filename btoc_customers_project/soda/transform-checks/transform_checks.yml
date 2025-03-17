@@ -1,0 +1,27 @@
+checks for btoc_customers:
+  - schema:
+      name: Check schema after transformation
+      fail:
+        when required column missing: 
+          - id
+          - created_at
+          - "Gender"
+          - "Title"
+          - "FirstName"
+          - "Surname"
+          - "EmailAddress"
+  - invalid_count("Gender"):
+      valid values:
+        - male
+        - female
+        - other
+        - Male
+        - Female
+        - Other
+        - MALE
+        - FEMALE
+        - OTHER
+      name: "Checks for consistency if Gender on the list [male, female, other]"
+      fail: when > 0
+  - duplicate_count("EmailAddress") = 0:
+      name: No duplicate email addresses

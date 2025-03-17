@@ -1,0 +1,9 @@
+checks for btoc_customers:
+  - missing_count("FirstName"):
+      name: All customers have a firstname
+      warn: when > 0
+  - missing_count("Surname"):
+      name: All customers have a surname
+      warn: when > 0
+  - missing_count("Birthday") = 0:
+      name: ALl customers have a birthday
