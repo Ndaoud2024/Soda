@@ -1,21 +1,24 @@
 name: Run Soda Scan on customers_certif
-on: pull_request
+
+on:
+  pull_request
 
 jobs:
   soda_scan:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Perform Soda Scan
-        uses: sodadata/soda-github-action@main
+        uses: sodadata/soda-github-action@v1.0.4
         env:
           SODA_CLOUD_API_KEY: ${{ secrets.SODA_CLOUD_API_KEY }}
           SODA_CLOUD_API_SECRET: ${{ secrets.SODA_CLOUD_API_SECRET }}
-          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
-          POSTGRES_USERNAME: ${{ secrets.POSTGRES_USERNAME }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRE_HOST: ${{ secrets.POSTGRE_HOST }}
+          POSTGRE_USERNAME: ${{ secrets.POSTGRE_USERNAME }}
+          POSTGRE_PASSWORD: ${{ secrets.POSTGRE_PASSWORD }}
         with:
           soda_library_version: v1.0.4
           data_source: customers_certif
