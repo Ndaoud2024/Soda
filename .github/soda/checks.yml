@@ -145,7 +145,6 @@ checks for btoc_customers:
         dimension: Consistency
   - failed rows:
       samples limit: 100
-      column: Title
       fail query: "SELECT\r\n    \"t\".\"Title\"\r\nFROM\r\n    btoc_customers t\r\
         \nWHERE        \r\n  LOWER(\"t\".\"Title\") NOT IN ('mr.', 'mister', 'sir','ms.','mrs.','madam','miss','missus','mx.');\r\
         \n    "
@@ -155,7 +154,6 @@ checks for btoc_customers:
         dimension: Validity
   - failed rows:
       samples limit: 100
-      column: LastRefreshTime
       fail query: "SELECT *\r\nFROM btoc_customers\r\nWHERE CAST(\"LastRefreshTime\"\
         \ AS integer) > 1440"
       name: Checks that the timeliness of the data
@@ -221,6 +219,6 @@ checks for btoc_customers:
   - firstname_for_customers:
       name: "Firstname is empty"
       query: |
-        SELECT COUNT(*) FROM btoc_customers WHERE "FirstName" IS NULL
+        SELECT COUNT(*) AS firstname_for_customers FROM btoc_customers WHERE "FirstName" IS NULL
       fail:
         when > 0
