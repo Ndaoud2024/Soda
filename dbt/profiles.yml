@@ -3,9 +3,9 @@ dbt_project:
   outputs:
     dev:
       type: postgres
-      host: ${POSTGRES_HOST}  # Correction du nom de variable
-      user: ${POSTGRES_USERNAME}
-      password: ${POSTGRES_PASSWORD}
+      host: "{{ env_var('POSTGRES_HOST') }}"
+      user: "{{ env_var('POSTGRES_USERNAME') }}"  # Ce champ est requis
+      password: "{{ env_var('POSTGRES_PASSWORD') }}"
       port: 5432
       dbname: postgres
       schema: public
