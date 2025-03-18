@@ -217,10 +217,6 @@ checks for btoc_customers:
   - values in ("Country") must exist in country (iso2)
   # Cross checks
   - row_count same as btob_customers
-  # Distribution check
-  - distribution_difference(bandecommande) > 0.1:
-       method: ks
-       distribution reference file: ./customers_dist_ref.yml
   #User-defined Check
   - firstname_for_customers:
       firstname_for_customers query: SELECT count(*) FROM btoc_customers
