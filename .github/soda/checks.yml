@@ -219,7 +219,8 @@ checks for btoc_customers:
   - row_count same as btob_customers
   #User-defined Check
   - firstname_for_customers:
-      firstname_for_customers query: SELECT "FirstName" FROM btoc_customers WHERE "FirstName" IS NULL
-      name: Firstname is empty
-      column: FirstName
-      fail: when > 0
+      name: "Firstname is empty"
+      query: |
+        SELECT COUNT(*) FROM btoc_customers WHERE "FirstName" IS NULL
+      fail:
+        when > 0
