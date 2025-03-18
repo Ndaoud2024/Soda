@@ -1,4 +1,4 @@
-create view "postgres"."public"."report_btoc_customers__dbt_tmp_workflow"
+create view "postgres"."public"."report_btoc_customers"
     
     
   as (
