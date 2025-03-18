@@ -2,10 +2,10 @@ data_source customers_certif:
     type: postgres
     database: postgres
     schema: public
-    env: 
-        host: ${POSTGRES_HOST}  # Correction du nom de variable
-        username: ${POSTGRES_USERNAME}
-        password: ${POSTGRES_PASSWORD}
+    #env: 
+    host: ${POSTGRES_HOST}  # Correction du nom de variable
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
 
 soda_cloud:
     # Use cloud.soda.io for EU region
