@@ -1,4 +1,4 @@
-customers_certif:
+dbt_project:
   target: dev
   outputs:
     dev:
