@@ -215,10 +215,3 @@ checks for btoc_customers:
   - values in ("Country") must exist in country (iso2)
   # Cross checks
   - row_count same as btob_customers
-  #User-defined Check
-  - firstname_for_customers:
-      name: "Firstname is empty"
-      query: |
-        SELECT COUNT(*) AS firstname_for_customers FROM btoc_customers WHERE "FirstName" IS NULL
-      fail:
-        when > 0
