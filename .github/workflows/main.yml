@@ -11,7 +11,7 @@ jobs:
   data_pipeline:
     runs-on: ubuntu-latest
     env:
-      DBT_PROFILES_DIR: ./dbt  # Chemin vers votre dossier de profils dbt
+      DBT_PROFILES_DIR: ./dbt/profiles  # Chemin vers votre dossier de profils dbt
       POSTGRES_SCHEMA: public
 
     steps:
