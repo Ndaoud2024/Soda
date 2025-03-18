@@ -1,4 +1,4 @@
-create  table "postgres"."public"."transform_btoc_customers__dbt_tmp"
+create  table "postgres"."public"."transform_btoc_customers__dbt_tmp_workflow"
     as
   (
 WITH cleaned_data AS (
