@@ -28,5 +28,7 @@ models:
   dbt:
     transform_btoc_customers:
       +materialized: table  # Les modèles dans le dossier transform seront des tables
+      +full_refresh: true
     report_btoc_customers:
       +materialized: view   # Les modèles dans le dossier report seront des vues
+      +full_refresh: true
