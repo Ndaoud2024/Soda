@@ -34,11 +34,11 @@ jobs:
           ls -la dbt
 
       - name: Run dbt commands
-          env:
+        env:
             POSTGRES_HOST: ${{ secrets.POSTGRE_HOST }}
             POSTGRES_USERNAME: ${{ secrets.POSTGRE_USERNAME }}
             POSTGRES_PASSWORD: ${{ secrets.POSTGRE_PASSWORD }}
-          run: |
+        run: |
             dbt debug --profiles-dir ./dbt --project-dir ./dbt
             dbt deps --profiles-dir ./dbt --project-dir ./dbt
             dbt run --profiles-dir ./dbt --project-dir ./dbt --target dev
