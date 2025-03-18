@@ -1,0 +1,11 @@
+customers_certif:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: ${POSTGRES_HOST}  # Correction du nom de variable
+      username: ${POSTGRES_USERNAME}
+      password: ${POSTGRES_PASSWORD}
+      dbname: postgres
+      schema: public
+      threads: 4
