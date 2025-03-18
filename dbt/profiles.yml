@@ -4,7 +4,7 @@ dbt_project:
     dev:
       type: postgres
       host: ${POSTGRES_HOST}  # Correction du nom de variable
-      username: ${POSTGRES_USERNAME}
+      user: ${POSTGRES_USERNAME}
       password: ${POSTGRES_PASSWORD}
       dbname: postgres
       schema: public
