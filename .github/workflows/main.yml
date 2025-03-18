@@ -1,18 +1,44 @@
-name: Run Soda Scan on customers_certif
+name: Run dbt and Soda Scan on customers_certif
 
 on:
   pull_request
+
 permissions:
   contents: read
   pull-requests: write
-  
+
 jobs:
-  soda_scan:
+  data_pipeline:
     runs-on: ubuntu-latest
+    env:
+      DBT_PROFILES_DIR: ./dbt  # Chemin vers votre dossier de profils dbt
+      POSTGRES_SCHEMA: public
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dbt and dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install dbt-postgres==1.7.4  # Version spécifique pour PostgreSQL
+          pip install -r requirements.txt  # Si vous avez des dépendances supplémentaires
+
+      - name: Run dbt
+        env:
+          POSTGRES_HOST: ${{ secrets.POSTGRE_HOST }}
+          POSTGRES_USER: ${{ secrets.POSTGRE_USERNAME }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRE_PASSWORD }}
+          POSTGRES_DB: postgres  # Nom de votre base de données
+        run: |
+          cd dbt  # Répertoire de votre projet dbt
+          dbt deps  # Installe les dépendances dbt
+          dbt run --target dev  # Exécute les modèles dbt
 
       - name: Perform Soda Scan
         uses: sodadata/soda-github-action@main
