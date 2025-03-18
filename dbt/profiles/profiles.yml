@@ -1,10 +1,10 @@
-customers_certif:
+dbt_project:
   target: dev
   outputs:
     dev:
       type: postgres
       host: ${POSTGRES_HOST}  # Correction du nom de variable
-      username: ${POSTGRES_USERNAME}
+      user: ${POSTGRES_USERNAME}
       password: ${POSTGRES_PASSWORD}
       dbname: postgres
       schema: public
