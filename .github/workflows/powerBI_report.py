@@ -9,9 +9,9 @@ from database.db import create_connection
 import os
 
 
-soda_cloud_url = os.getenv("SODA_URL") # Use cloud.soda.io for EU region
-soda_apikey = os.getenv("SODA_API_KEY")
-soda_apikey_secret = os.getenv("SODA_SECRET_KEY")
+soda_cloud_url = os.getenv("SODA_CLOUD_URL") # Use cloud.soda.io for EU region
+soda_apikey = os.getenv("SODA_CLOUD_API_KEY")
+soda_apikey_secret = os.getenv("SODA_CLOUD_SECRET_KEY")
 
 response = requests.get(
     f'{soda_cloud_url}/api/v1/checks?size=100',
