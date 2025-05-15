@@ -57,3 +57,17 @@ jobs:
           data_source: customers_certif
           configuration: .github/soda/configuration.yml
           checks: .github/soda/checks.yml
+          
+      - name: Generate Power BI Custom Report
+        run: |
+          echo "Début de l'étape Generate Power BI Custom Report"    
+          pip install psycopg2-binary pandas sqlalchemy==2.0.25
+          echo "Dépendances installées"
+          python .github/workflows/powerBI_report.py  # Chemin à adapter
+        env:
+          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USERNAME }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          SODA_CLOUD_API_KEY: ${{ secrets.SODA_CLOUD_API_KEY }}      # À vérifier
+          SODA_CLOUD_API_SECRET: ${{ secrets.SODA_CLOUD_API_SECRET }} # À vérifier
