@@ -3,6 +3,7 @@ import pandas as pd
 import json
 import time
 import psycopg2
+
 from psycopg2 import sql
 from datetime import datetime, timedelta
 from db_connection import create_connection
@@ -98,7 +99,7 @@ if response.status_code == 200:
         print("Failed to create a connection to PostgreSQL.")
         message = f"Failed to create a connection to PostgreSQL."
 
-    return message
+    print(message)
 
 else:
-    return f"Error fetching initial checks. Status code: {response.status_code}"
+    print(f"Error fetching initial checks. Status code: {response.status_code}")
