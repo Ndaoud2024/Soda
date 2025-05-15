@@ -18,7 +18,7 @@ response = requests.get(
     f'{soda_cloud_url}/api/v1/checks?size=100',
     auth=(soda_apikey, soda_apikey_secret)
 )
-checks_table = 'certif_soda_checks'
+checks_table = 'narjes_certif_soda_checks'
 print(f"response: {response}")
 if response.status_code == 200:
     message = f"Checks have been written to the {checks_table} table in PostgreSQL."
