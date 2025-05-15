@@ -12,7 +12,7 @@ import os
 
 soda_cloud_url = os.getenv("SODA_CLOUD_URL") # Use cloud.soda.io for EU region
 soda_apikey = os.getenv("SODA_CLOUD_API_KEY")
-soda_apikey_secret = os.getenv("SODA_CLOUD_SECRET_KEY")
+soda_apikey_secret = os.getenv("SODA_CLOUD_API_SECRET")
 
 response = requests.get(
     f'{soda_cloud_url}/api/v1/checks?size=100',
