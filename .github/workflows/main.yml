@@ -68,7 +68,7 @@ jobs:
           POSTGRES_HOST: ${{ secrets.POSTGRE_HOST }}
           POSTGRES_USER: ${{ secrets.POSTGRE_USERNAME }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRE_PASSWORD }}
-          POSTGRES_DB: ${{ secrets.POSTGRE_DB }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           SODA_CLOUD_API_KEY: ${{ secrets.SODA_CLOUD_API_KEY }}      # À vérifier
           SODA_CLOUD_API_SECRET: ${{ secrets.SODA_CLOUD_API_SECRET }} # À vérifier
           SODA_CLOUD_URL: ${{ secrets.SODA_CLOUD_URL }}
