@@ -14,7 +14,7 @@ soda_apikey = os.getenv("SODA_API_KEY")
 soda_apikey_secret = os.getenv("SODA_SECRET_KEY")
 
 response = requests.get(
-    f'{soda_cloud_url}/api/v1/checks?datasetId=e62d0186-8cb3-44e0-a166-5c37353e0d4c&size=100',
+    f'{soda_cloud_url}/api/v1/checks?size=100',
     auth=(soda_apikey, soda_apikey_secret)
 )
 checks_table = 'certif_soda_checks'
