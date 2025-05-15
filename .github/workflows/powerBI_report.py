@@ -5,7 +5,7 @@ import time
 import psycopg2
 from psycopg2 import sql
 from datetime import datetime, timedelta
-from database.db import create_connection
+from db_connection import create_connection
 import os
 
 
