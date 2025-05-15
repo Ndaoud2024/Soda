@@ -55,7 +55,19 @@ if response.status_code == 200:
     
     if connection is not None:
         cursor = connection.cursor()
-
+        create_table_query = f'''
+            CREATE TABLE IF NOT EXISTS {checks_table} (
+                id TEXT PRIMARY KEY,
+                {', '.join(f'"{col}" TEXT' for col in df_checks.columns if col != 'id')}
+            )
+            '''
+        try:
+            cursor.execute(create_table_query)
+            connection.commit()
+            print(f"Table {checks_table} vérifiée/créée avec succès.")
+        except Exception as e:
+            print(f"Erreur lors de la création de la table : {e}")
+            connection.rollback()
         # Prepare the SQL query for inserting or updating data
         columns = df_checks.columns.tolist()
         quoted_columns = [f'"{col}"' for col in columns]
