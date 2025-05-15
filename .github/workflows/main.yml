@@ -65,9 +65,10 @@ jobs:
           echo "Dépendances installées"
           python .github/workflows/powerBI_report.py  # Chemin à adapter
         env:
-          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
-          POSTGRES_USER: ${{ secrets.POSTGRES_USERNAME }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_HOST: ${{ secrets.POSTGRE_HOST }}
+          POSTGRES_USER: ${{ secrets.POSTGRE_USERNAME }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRE_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.POSTGRE_DB }}
           SODA_CLOUD_API_KEY: ${{ secrets.SODA_CLOUD_API_KEY }}      # À vérifier
           SODA_CLOUD_API_SECRET: ${{ secrets.SODA_CLOUD_API_SECRET }} # À vérifier
+          SODA_COULD_URL: ${{ secrets.SODA_CLOUD_URL }}
