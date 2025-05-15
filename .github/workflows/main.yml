@@ -71,4 +71,4 @@ jobs:
           POSTGRES_DB: ${{ secrets.POSTGRE_DB }}
           SODA_CLOUD_API_KEY: ${{ secrets.SODA_CLOUD_API_KEY }}      # À vérifier
           SODA_CLOUD_API_SECRET: ${{ secrets.SODA_CLOUD_API_SECRET }} # À vérifier
-          SODA_COULD_URL: ${{ secrets.SODA_CLOUD_URL }}
+          SODA_CLOUD_URL: ${{ secrets.SODA_CLOUD_URL }}
