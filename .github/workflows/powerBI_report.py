@@ -74,8 +74,8 @@ if response.status_code == 200:
         columns_str = ', '.join(quoted_columns)
         values_placeholder = ', '.join(['%s'] * len(columns))
 
-        # Define the conflict action: if the id exists, update the columns
-        conflict_action = sql.SQL("ON CONFLICT (id) DO UPDATE SET {}").format(
+        # Define the conflict action: if the name exists, update the columns
+        conflict_action = sql.SQL("ON CONFLICT (name) DO UPDATE SET {}").format(
             sql.SQL(', ').join(
                 [sql.SQL(f'"{col}" = EXCLUDED."{col}"') for col in columns]
             )
